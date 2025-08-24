@@ -16,6 +16,7 @@ public class MemoryGame extends JFrame implements ActionListener {
     private int rows;
     private int columns;
     private int totalPairs;
+    private int moveCount; // Adding a counter
 
     public MemoryGame(int rows, int columns, int totalPairs) {
         this.rows = rows;
@@ -30,6 +31,7 @@ public class MemoryGame extends JFrame implements ActionListener {
         selectedColors = new ArrayList<>();
         buttons = new ArrayList<>();
         pairsFound = 0;
+        moveCount = 0;
 
         initButtons(totalCards);
         initColors();
@@ -104,7 +106,8 @@ public class MemoryGame extends JFrame implements ActionListener {
     }
 
     private void handleGameOver() {
-        int choice = JOptionPane.showConfirmDialog(this, "Congratulations! You won!\nDo you want to play again?",
+        int choice = JOptionPane.showConfirmDialog(this,
+                "Congratulations! You won in " + moveCount + "!\nDo you want to play again?",
                 "Game Over", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             resetGame();
@@ -115,6 +118,7 @@ public class MemoryGame extends JFrame implements ActionListener {
 
     private void resetGame() {
         pairsFound = 0;
+        moveCount = 0;
         for (JButton button : buttons) {
             button.setBackground(Color.LIGHT_GRAY);
             button.setEnabled(true);
